@@ -6,6 +6,7 @@ const multer = require("multer");
 const path = require("path");
 const pinRoute = require("./Routes/pins.js")
 const authRoute = require("./Routes/auth.js")
+const bodyParserr = require('body-parser')
 
 dotenv.config();
 
@@ -19,8 +20,8 @@ mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopol
 }).catch((error) => console.log(error))
 
 app.use(express.json());
-app.use("/api/pins/",pinRoute);
-app.use("/api/auth/",authRoute);
+app.use("/api/pins",pinRoute);
+app.use("/api/auth",authRoute);
 
 app.listen(PORT,()=>{
     console.log("backend server is runing")

@@ -5,16 +5,19 @@ const CryptoJS = require("crypto-js");
 
 //REGISTER
 router.post("/register", async (req, res) => {
+  const {email , password} = req.body
+
   const newUser = new User({
    
-    email: req.body.email,
+    email: email,
     password: CryptoJS.AES.encrypt(
-      req.body.password,
+      password,
       process.env.SECRET_KEY
     ).toString(),
   });
-  const existUserByMail = await User.findOne({email : req.body.email});
+  const existUserByMail = await User.find({email : email});
   if(existUserByMail) return res.status(400).json("There is a registered user with this email address.");
+  console.log(newUser) 
   try {    
     const user = await newUser.save();
     res.status(201).json(user);
