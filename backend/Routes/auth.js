@@ -15,13 +15,14 @@ router.post("/register", async (req, res) => {
       process.env.SECRET_KEY
     ).toString(),
   });
-  const existUserByMail = await User.find({email : email});
+  const existUserByMail = await User.findOne({ email});
   if(existUserByMail) return res.status(400).json("There is a registered user with this email address.");
   console.log(newUser) 
   try {    
     const user = await newUser.save();
     res.status(201).json(user);
   } catch (err) {
+    console.log(err);
     res.status(500).json(err);    
   }
 });
@@ -30,7 +31,7 @@ router.post("/register", async (req, res) => {
 router.post("/login", async (req, res) => {
   const { email, password} = req.body;
   try {
-    const user = await User.findOne({ email });
+    const user = await User.findOne( {email} );
     if(!user) return res.status(404).json("User doesn't exist!");
 
     const bytes = CryptoJS.AES.decrypt(user.password, process.env.SECRET_KEY);

@@ -15,7 +15,7 @@ app.use(cors())
 
 const PORT = process.env.PORT || 8800;
 
-mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true, useUnifiedTopology: true, useCreateIndex: true }).then(() => {
+mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true,forceServerObjectId:true, useUnifiedTopology: true, useCreateIndex: true }).then(() => {
     console.log("MongoDB connected");
 }).catch((error) => console.log(error))
 
