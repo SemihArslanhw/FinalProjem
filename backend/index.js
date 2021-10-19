@@ -15,6 +15,19 @@ app.use(cors())
 
 const PORT = process.env.PORT || 8800;
 
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, "images")
+    }, filename: (req, file, cb) => {
+        cb(null, req.body.name);
+    },
+})
+
+const upload = multer({storage: storage});
+app.post("/api/upload",upload.single("file"),(req,res)=>{
+    res.status(200).json("File has been uploaded!");
+})
+
 mongoose.connect(process.env.MONGO_URL, { useNewUrlParser: true,forceServerObjectId:true, useUnifiedTopology: true, useCreateIndex: true }).then(() => {
     console.log("MongoDB connected");
 }).catch((error) => console.log(error))

@@ -1,13 +1,17 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { useHistory } from 'react-router';
 import CompanyHeader from './companyHeader'
 import CompanyLeftBar from './companyLeftBar'
+import * as api from "../../api/index"
 
 function CreateCompany() {
+    const [user] = useState(JSON.parse(localStorage.getItem('profile')));
     const companyName = useRef();
     const description = useRef();
     const [comString, setComString] = useState();
     const [comDescription, setComDescription] = useState();
-
+    const history = useHistory();
+    const [file, setFile] = useState(null);
 
     const companyNameAlgorthym = () => {
         const comText = companyName.current.value;
@@ -18,6 +22,21 @@ function CreateCompany() {
         const comDesc = description.current.value
         setComDescription(comDesc);
 
+    }
+    const filePost = (e) => {
+        e.preventDefault();
+        const username = user?.result.username;
+      
+        if (file) {
+            const data = new FormData();
+            const filename = username + "_" + file.name;
+            data.append("name", filename);
+            data.append("file", file);
+           
+
+        } else {
+            alert("You didn't add any file!");
+        }
     }
     return (
         <div className="w-full h-full  mt-20 flex text-black">
@@ -33,7 +52,8 @@ function CreateCompany() {
                             <p className="text-white mx-10" >{comString}</p>
                             <p className="text-white mt-10 mx-10">{comDescription}</p>
                         </div>
-                        <img className="absolute rounded-full w-20 h-20 bg-white "></img>
+                        {!file && <img className="absolute rounded-full w-20 h-20 bg-gray-200 "></img>}
+                        {file && <img className="absolute object-fill rounded-full w-20 h-20" src={URL.createObjectURL(file)} alt=""/>}
                     </div>
                     <h1 className="my-3 font-mono">Gerekli Bilgiler</h1>
                     <div className=" shadow-sm   flex   w-full">
@@ -101,7 +121,23 @@ function CreateCompany() {
                         </div>
 
                     </div>
+                    <div>
                     <h1 className="font-mono my-3">İsteğe Bağlı Bilgiler</h1>
+                    <div className=" flex flex-col my-3 w-2/4 items-center h-10 ">
+
+                            <div className="flex bg-gray-200  rounded-lg  items-center ">
+                            <input
+                                        type="file"
+                                        id="fileInput"
+                                        className="opacity-100"
+                                        onChange={(e) => setFile(e.target.files[0])}
+                                        
+                                    />
+
+                            </div>
+                        </div>
+                    </div>
+                   
                 </div>
 
 
