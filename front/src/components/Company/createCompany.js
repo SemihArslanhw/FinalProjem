@@ -10,7 +10,7 @@ function CreateCompany() {
     const companyName = useRef();
     const description = useRef();
     const [qrImage, setQrImage] = useState(null)
-    const [comString, setComString] = useState();
+    const [comString, setComString] = useState("");
     const [comDescription, setComDescription] = useState();
     const history = useHistory();
     const [logoFile, setLogoFile] = useState(null);
@@ -62,7 +62,7 @@ function CreateCompany() {
                     <p className="text-left w-4/5"> Şirket görünüm önizlemesi </p>
                     <div className="shadow-sm h-52  container mx-auto flex flex-col items-center  ">
                         {!backTopImageFile && <img className=" bg-yellow-400 rounded-t-lg w-4/5 h-16" ></img>}
-                        {companyName.current.value !== "" &&(<div className="right-0 flex items-center absolute top-40"><p>Şirket Qr Kodu (İndirmek İçin Qr Koda Tıklayın)</p> <a href={qrImage} download> <img  className=" w-20 h-20  " src={qrImage}></img> </a> </div>) }
+                        {comString !== "" &&(<div className="right-0 flex items-center absolute top-40"><p>Şirket Qr Kodu (İndirmek İçin Qr Koda Tıklayın)</p> <a href={qrImage} download> <img  className=" w-20 h-20  " src={qrImage}></img> </a> </div>) }
                         {backTopImageFile && <img className=" object-fill rounded-t-lg w-4/5 h-16" src={URL.createObjectURL(backTopImageFile)} alt="" />}
                         <div className="bg-blue-800 flex  justify-between items-center rounded-b-lg w-4/5 h-28">
                             <p className="text-white mx-10" >{comString}</p>
