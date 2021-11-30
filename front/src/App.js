@@ -2,6 +2,7 @@ import React,{useState} from "react";
 import Home from "./pages/home";
 import Login from "./pages/login";
 import Register from "./pages/register"
+import CompanyDetails from "./pages/companyDetails";
 import { ToastContainer } from 'react-toastify'
 
 import {
@@ -40,8 +41,11 @@ function App() {
           <Route path="/company" exact >
           {!user ? <Redirect to="/giris"/> :<CompanyPage/>}
           </Route>
-          <Route path="/company/createcompany">
+          <Route path="/company/createcompany" exact>
           {!user ? <Redirect to="/giris"/> :<Createcompany/>}
+          </Route>
+          <Route path="/company/:companyname">
+          {!user ? <Redirect to="/giris"/> :<CompanyDetails/>}
           </Route>
         </Switch>
       </Router>

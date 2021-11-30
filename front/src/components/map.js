@@ -3,6 +3,7 @@ import ReactMapGL, { Marker , Popup} from 'react-map-gl';
 import {Room} from "@material-ui/icons";
 
 function Map({pins}) {
+
     const [showPopup, togglePopup] = useState(false);
     const [viewport, setViewport] = useState({
       latitude: 39,
@@ -10,9 +11,9 @@ function Map({pins}) {
       zoom:4
     });
     
-    useEffect(()=>{
-      console.log(pins?.data);
-    },[pins])
+   useEffect(()=>{
+     console.log(pins);
+   },[pins])
 
     return (
         <div className="h-full w-full">
@@ -24,17 +25,23 @@ function Map({pins}) {
           onViewportChange={(viewport) => setViewport(viewport)}
           mapStyle="mapbox://styles/semiharslanhw/cku9yduu72ch917mwngkd5uwo"
           >
-        {/* pins?.data?.map((data)=>{
-          <Marker
-          latitude={data.lat}
-          longitude={data.long}
+        {pins?.map((data)=>{
+          
+        return(
+           <Marker
+          latitude={data?.lat}
+          longitude={data?.long}
           offsetLeft={-viewport.zoom * 3.5}
           offsetTop = {-viewport.zoom * 7 }
           >
-          <Room className="h-20 w-20 text-black"/>
+          <Room style={{fontSize:viewport.zoom * 7}} className="h-20 w-20 text-black"/>
 
-          </Marker>         
-        })*/}
+          </Marker>
+          )  
+              
+          
+                
+        })}
         </ReactMapGL>
   
       </div>

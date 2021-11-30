@@ -25,15 +25,17 @@ function Header() {
         <div className="w-full fixed flex items-center z-50 justify-around shadow-md bg-white h-20">
             <div onClick={() => { history.push("/") }} translate="no" className=" font-mono cursor-pointer text-black">Final Proje</div>
 
-            <div className="flex bg-gray-400 rounded-lg w-2/4 items-center ">
-                <input className="flex bg-gray-200 h-10 rounded-l-lg  p-3 w-11/12 text-gray-900 items-center outline-none " value={search} onChange={e => { setSearch(e.target.value) }} placeholder="Aradığınız ürün, kategori veya markayı yazınız" type="text"></input>
-             <div className="flex w-1/12 h-full items-center justify-center"><Search /></div> 
-            </div>
+            <div class="relative w-1/4 text-gray-700">
+  <input class="w-full h-10 pl-8 pr-3 text-base placeholder-gray-600 border rounded-lg outline-none bg-gray-200 focus:border-black" type="text" placeholder="Markaya , kıyafete göre arama yap"/>
+  <div class="absolute inset-y-0 left-0 flex items-center px-2 pointer-events-none">
+   <Search></Search>
+  </div>
+</div>
             {!user ? <div onClick={()=>{history.push("/giris")}} className="flex cursor-pointer text-black group"><p className="group-hover:text-yellow-600">Giriş Yap</p> <Person className="group-hover:text-yellow-600"/> </div> : <div className="flex w-40 items-center justify-between">  
                <div onClick={()=>history.push("/company")} className="text-black cursor-pointer group flex items-center"> <p className="transition transform duration-500 ease-in-out group-hover:text-red-600 mx-1">Mağazam</p> <ShoppingBasket className="transition  transform duration-500 ease-in-out h-10 w-20 rounded-lg text-blue-600 group-hover:text-red-600 " fontSize="small"/></div>
               <div className="cursor-pointer"   onClick={() => { setProfileBar(!profileBar) }}><Avatar alt={user?.result.email} src={PF + "avatar.png"} />  </div></div>}
             {profileBar && (
-                <ul className="p-2 w-40 border-r bg-white absolute rounded right-0 shadow mt-16 top-0 ">
+                <ul className="p-2 w-40 border-r bg-white absolute rounded right-0 lg:right-40 shadow mt-16 top-0 ">
                     <li onClick={() => history.push(`/profile/${user.result.email}`)} className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-gray-300 focus:text-gray-300 focus:outline-none">
                         <div className="flex items-center">
                             <svg xmlns="http://www.w3.org/2000/svg" className="icon icon-tabler icon-tabler-user" width={20} height={20} viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">

@@ -47,9 +47,6 @@ router.post("/login", async (req, res) => {
   }
 });
 
-//REGISTER WITH COMPANY
-router.post("/loginWithCompany",async (req,res)=>{
-  
-})
+
 
 module.exports = router;

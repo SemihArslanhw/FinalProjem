@@ -1,6 +1,8 @@
 const router = require("express").Router();
-const Pin = require("../Models/Pins");
-const verify = require("../verifyToken.js")
+const Pin = require("../Models/Pins.js");
+const Company = require("../Models/Companies.js");
+const verify = require("../verifyToken.js");
+const Branch = require("../Models/Branch.js");
 
 //CREATE A NEW PIN
 router.post("/create",async (req,res)=>{
@@ -23,20 +25,28 @@ try {
 }
 })
 
-//GET PIN BY COMPANY
+//GET PIN BY BRANCH
 router.get("/getByID/:id",async (req,res)=>{
     const {id} = req.params
     console.log(id)
     try {
-        const getPin =await Pin.find({CompanyId:id})
+        const getPin =await Pin.find({BranchId:id})
         res.status(200).json(getPin);
     } catch (error) {
         res.status(500).json(error)
     }
+})
 
-
-
-
+//GET PIN BY COMPANY
+router.get("/getByCompany/:id",async (req,res)=>{
+    const {id} = req.params
+    try {
+        const getBranch =await Branch.find({CompanyId:id})
+        const getPin =await Pin.find({BranchId:getBranch[0]._id})
+        res.status(200).json(getPin);
+    } catch (error) {
+        res.status(500).json(error)
+    }
 })
 
 
