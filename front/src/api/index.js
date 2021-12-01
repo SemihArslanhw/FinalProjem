@@ -36,3 +36,6 @@ export const getCompanyByCompanyName = (companyName) => API.get("/companies/getB
 
   //GET PIN BY COMPANYNAME
 export const getPinByCompanyId = (companyId) => API.get("/pins/getByCompany/"+companyId)
+
+  //GET BRANCHES BY COMPANYID
+export const getBranchesByCompanyId = (companyID) => API.get("/branches/getByCompanyID/" + companyID)

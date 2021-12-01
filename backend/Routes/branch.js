@@ -15,4 +15,19 @@ router.post("/create", async (req, res) => {
     }
 });
 
+//GET BRANCH BY COMPANY ID
+ router.get("/getByCompanyID/:id",async(req,res)=>{
+   const {id} = req.params
+   try {
+    const gettedBranches = await  Branch.find({CompanyId:id})
+    res.status(200).json(gettedBranches)
+   } catch (error) {
+       console.log(error)
+       res.status(500).json(error)
+   }
+   
+   
+
+ })
+
 module.exports = router;

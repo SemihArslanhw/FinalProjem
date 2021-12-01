@@ -3,37 +3,56 @@ import moment, { localeData } from "moment";
 import 'moment/locale/tr'
 import Map from '../map';
 import * as api from "../../api/index";
+import DetailCompanyComp from './detailCompanyComp/detailCompanyComp';
 
 function DetailComponent({ company }) {
   const [user] = useState(JSON.parse(localStorage.getItem('profile')));
   const PF = "http://localhost:8800/images/";
+  const [branchesLoading , setBranchesLoading] = useState(true);
+  const [branches , setBranches] = useState([]);
   const [pinloading, setPinLoading] = useState(true);
   const [pins, setPins] = useState([]);
   moment.locale("tr");
 
   useEffect(() => {
-    const getPinsByCompany = async () => {
-      
-          try {
+   
+    getBranchesByCompanyId();
+    getPinsByCompany();
+
+  }, [])
+
+  const getBranchesByCompanyId = async () => {
+   
+    try {
+      const Branches = await api.getBranchesByCompanyId(company._id);
+      console.log(Branches.data)
+      setBranches(Branches.data);
+      setBranchesLoading(false);
+    } catch (error) {
+      setBranchesLoading(false);
+      console.log(error)
+    }
+   
+  }
+
+  const getPinsByCompany = async () => {
+
+    try {
       const pins = await api.getPinByCompanyId(company._id);
       setPins(pins.data);
       setPinLoading(false);
-     } catch (error) {
-       setPinLoading(false);
-       console.log(error);
-     }
-        
+    } catch (error) {
+      setPinLoading(false);
+      console.log(error);
     }
-    
-      getPinsByCompany();
-   
-  }, [])
-  
-  if(pinloading === false && company === undefined){
+
+  }
+
+  if (pinloading === false && company === undefined) {
     return <div className="mt-20 text-black">Böyle bir şirket bulunamadı</div>
   }
 
-  
+
 
   return (
     <div className="container m-auto w-full  mt-20  font-bold text-base text-black">
@@ -55,8 +74,8 @@ function DetailComponent({ company }) {
       </div>
       {/* BOTTOM SECTION */}
       <div className="w-full flex container m-auto gap-5 mt-5">
-        <div className="w-1/2 flex justify-center container m-auto bg-gray-400 h-96 ">
-        {pinloading ? <div class="flex justify-center  items-center">
+        <div className="w-1/2 flex justify-center container m-auto bg-gray-300 h-96 ">
+          {pinloading ? <div class="flex justify-center  items-center">
             <div
               class="
       animate-spin
@@ -70,8 +89,15 @@ function DetailComponent({ company }) {
             : <Map pins={pins}></Map>
           }
         </div>
-        <div className="w-1/2 container m-auto bg-gray-400 h-96 ">
-          
+        
+          <div className="w-1/2 overflow-y-scroll rounded-xl container m-auto bg-gray-300 h-96 ">
+        
+        {branchesLoading ?  <div className="h-full w-full flex items-center justify-center">  <div class="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-purple-500"
+            ></div> </div>: // <p>Yüklendi</p> 
+            branches?.map((branch)=>{
+             return <DetailCompanyComp Branch={branch} />
+             
+            }) }
         </div>
       </div>
     </div>
