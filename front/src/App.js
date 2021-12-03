@@ -44,8 +44,12 @@ function App() {
           <Route path="/company/createcompany" exact>
           {!user ? <Redirect to="/giris"/> :<Createcompany/>}
           </Route>
-          <Route path="/company/:companyname">
+          <Route path="/company/:companyname" exact>
           {!user ? <Redirect to="/giris"/> :<CompanyDetails/>}
+          </Route>
+          <Route path="/createBranch">
+          {!user ? <Redirect to="/giris"/> :<p>createBranch</p>}
+
           </Route>
         </Switch>
       </Router>

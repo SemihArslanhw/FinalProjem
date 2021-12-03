@@ -22,7 +22,7 @@ function Header() {
       
     
     return (
-        <div className="w-full fixed flex items-center z-50 justify-around shadow-md bg-white h-20">
+        <div className="w-full z-50 fixed flex items-center  justify-around shadow-md bg-white h-20">
             <div onClick={() => { history.push("/") }} translate="no" className=" font-mono cursor-pointer text-black">Final Proje</div>
 
             <div class="relative w-1/4 text-gray-700">

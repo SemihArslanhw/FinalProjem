@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import * as api from "../../api/index";
 import DetailComponent from "./detailComponent";
 
-function CompanyDetailsComps() {
+function CompanyDetailsComps({setCreateBranch}) {
 
     const [user] = useState(JSON.parse(localStorage.getItem('profile')));
     const [company, setCompany] = useState();
@@ -50,7 +50,7 @@ function CompanyDetailsComps() {
           <div class="bg-gray-200 w-20 h-8 animate-pulse rounded-full ml-auto" ></div>
         </div>
       </div>
-</div> :  <DetailComponent company={company}/>}
+</div> :  <DetailComponent setCreateBranch={setCreateBranch} company={company}/>}
         </div>
     )
 }

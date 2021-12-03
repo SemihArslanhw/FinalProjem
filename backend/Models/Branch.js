@@ -10,7 +10,6 @@ const BranchSchema = new mongoose.Schema({
     }, 
     BranchName:{
         type:String,
-        unique:true,
         require:true,
         min:3,
         max:20,
@@ -33,6 +32,9 @@ const BranchSchema = new mongoose.Schema({
         type:Number,
         unique:true,
         require:true,
+    },
+    BranchImage:{
+        type:String,
     }
 },
    
