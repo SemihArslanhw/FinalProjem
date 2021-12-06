@@ -13,6 +13,7 @@ import {
 } from "react-router-dom";
 import CompanyPage from "./pages/company";
 import Createcompany from "./pages/createcompany";
+import BranchCreatePage from "./pages/branchCreatePage";
 
 
 function App() {
@@ -47,8 +48,8 @@ function App() {
           <Route path="/company/:companyname" exact>
           {!user ? <Redirect to="/giris"/> :<CompanyDetails/>}
           </Route>
-          <Route path="/createBranch">
-          {!user ? <Redirect to="/giris"/> :<p>createBranch</p>}
+          <Route path="/company/:companyname/createBranch">
+          {!user ? <Redirect to="/giris"/> :<BranchCreatePage/>}
 
           </Route>
         </Switch>
