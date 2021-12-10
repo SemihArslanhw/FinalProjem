@@ -4,15 +4,12 @@ const BranchSchema = new mongoose.Schema({
     CompanyId: {
         type:String,
         require:true,
-        min:3,
-        max:20,
-        
+                
     }, 
     BranchName:{
         type:String,
         require:true,
-        min:3,
-        max:20,
+
     },
     BranchAddress:{
         type:String,
@@ -33,8 +30,13 @@ const BranchSchema = new mongoose.Schema({
         unique:true,
         require:true,
     },
+    BranchGoogleMaps:{
+        type:String,
+        require:true,
+    },
     BranchImage:{
         type:String,
+        require:true,
     }
 },
    

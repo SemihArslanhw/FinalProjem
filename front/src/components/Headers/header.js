@@ -33,7 +33,7 @@ function Header() {
 </div>
             {!user ? <div onClick={()=>{history.push("/giris")}} className="flex cursor-pointer text-black group"><p className="group-hover:text-yellow-600">Giriş Yap</p> <Person className="group-hover:text-yellow-600"/> </div> : <div className="flex w-40 items-center justify-between">  
                <div onClick={()=>history.push("/company")} className="text-black cursor-pointer group flex items-center"> <p className="transition transform duration-500 ease-in-out group-hover:text-red-600 mx-1">Mağazam</p> <ShoppingBasket className="transition  transform duration-500 ease-in-out h-10 w-20 rounded-lg text-blue-600 group-hover:text-red-600 " fontSize="small"/></div>
-              <div className="cursor-pointer"   onClick={() => { setProfileBar(!profileBar) }}><Avatar alt={user?.result.email} src={PF + "avatar.png"} />  </div></div>}
+              <div className="cursor-pointer"   onClick={() => { setProfileBar(!profileBar) }}><Avatar alt={user?.result.email}  />  </div></div>}
             {profileBar && (
                 <ul className="p-2 w-40 border-r bg-white absolute rounded right-0 lg:right-40 shadow mt-16 top-0 ">
                     <li onClick={() => history.push(`/profile/${user.result.email}`)} className="cursor-pointer text-gray-600 text-sm leading-3 tracking-normal py-2 hover:text-gray-300 focus:text-gray-300 focus:outline-none">

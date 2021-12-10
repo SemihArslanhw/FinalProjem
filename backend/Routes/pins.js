@@ -11,7 +11,8 @@ try {
    const savedPin =await newPin.save();
    res.status(200).json(savedPin)
 } catch (error) {
-    res.status(500).json(err)
+    console.log(error)
+    res.status(500).json(error)
 }
 })
 
@@ -30,7 +31,7 @@ router.get("/getByID/:id",async (req,res)=>{
     const {id} = req.params
     console.log(id)
     try {
-        const getPin =await Pin.find({BranchId:id})
+        const getPin =await Pin.find({BranchName:id})
         res.status(200).json(getPin);
     } catch (error) {
         res.status(500).json(error)
@@ -40,9 +41,13 @@ router.get("/getByID/:id",async (req,res)=>{
 //GET PIN BY COMPANY
 router.get("/getByCompany/:id",async (req,res)=>{
     const {id} = req.params
+    const getPin = [];
     try {
         const getBranch =await Branch.find({CompanyId:id})
-        const getPin =await Pin.find({BranchId:getBranch[0]._id})
+        for (let i = 0; i < getBranch.length; i++) {
+            const getPinByBranch = await Pin.find({BranchName:getBranch[i].BranchName})
+            getPin.push(getPinByBranch)
+        }
         res.status(200).json(getPin);
     } catch (error) {
         res.status(500).json(error)

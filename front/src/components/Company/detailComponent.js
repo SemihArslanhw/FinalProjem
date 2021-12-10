@@ -18,7 +18,6 @@ function DetailComponent({ company , setCreateBranch}) {
   moment.locale("tr");
 
   useEffect(() => {
-   
     getBranchesByCompanyId();
     getPinsByCompany();
 
@@ -28,7 +27,6 @@ function DetailComponent({ company , setCreateBranch}) {
    
     try {
       const Branches = await api.getBranchesByCompanyId(company._id);
-      console.log(Branches.data)
       setBranches(Branches.data);
       setBranchesLoading(false);
     } catch (error) {
@@ -66,7 +64,8 @@ function DetailComponent({ company , setCreateBranch}) {
         
         <div class="flex flex-col flex-1 gap-5 sm:p-2">
           <div class="flex  flex-1 flex-col gap-3 items-center">
-          <div className="ml-auto flex flex-col"><p onClick={()=>history.push("/company/" + company?.CompanyName + "/createBranch")} className="transition-all cursor-pointer hover:text-yellow-500">Yeni Şube Oluştur</p></div>
+          <div className="ml-auto flex flex-col">
+          {company.Author === user.result.email && <p onClick={()=>history.push("/company/" + company?.CompanyName + "/createBranch")} className="transition-all cursor-pointer hover:text-yellow-500">Yeni Şube Oluştur</p>}  </div>
             <img src={PF + company?.Companyimage} class="bg-gray-200 w-14 h-14 rounded-2xl" ></img>
             <div class=" w-full m-1 h-3 rounded-2xl" >Şirket ismi : {company?.CompanyName}</div>
             <div class=" w-full m-1 h-3 rounded-2xl" >Şirket Açıklaması:{company?.Description}</div>

@@ -22,6 +22,9 @@ export const uploadFile = (data) => API.post("/upload", data);
  // REGİSTER
 export const register = (email,password) => API.post("/auth/register" , {email , password}) 
 
+ // CREATİNG NEW PİN
+export const createPin = (BranchName,lat,long) => API.post("/pins/create" ,{BranchName ,lat,long} );
+
   //GET ALL PİNS
 export const getAllPins = () => API.get("/pins")
 
@@ -39,3 +42,6 @@ export const getPinByCompanyId = (companyId) => API.get("/pins/getByCompany/"+co
 
   //GET BRANCHES BY COMPANYID
 export const getBranchesByCompanyId = (companyID) => API.get("/branches/getByCompanyID/" + companyID)
+
+  //CREATE BRANCH
+export const createBranch = (CompanyId,BranchName,BranchAddress,BranchAddressCity,BranchAddressdistrict,BranchPhone,BranchGoogleMaps,BranchImage) => API.post("/branches/create" , {CompanyId,BranchName,BranchAddress,BranchAddressCity,BranchAddressdistrict,BranchPhone,BranchGoogleMaps,BranchImage})

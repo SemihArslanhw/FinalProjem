@@ -14,6 +14,14 @@ function Map({pins}) {
    useEffect(()=>{
      console.log(pins);
    },[pins])
+   
+   const handleMarkerClick = (lat,long) =>{
+     setViewport({
+       latitude:lat,
+       longitude:long,
+       zoom:17
+     })
+   }
 
     return (
         <div className="h-full w-full">
@@ -28,14 +36,14 @@ function Map({pins}) {
         {pins?.map((data)=>{
           
         return(
-           <Marker
-          latitude={data?.lat}
-          longitude={data?.long}
+          <Marker
+          latitude={data[0]?.long}
+          longitude={data[0]?.lat}
           offsetLeft={-viewport.zoom * 3.5}
           offsetTop = {-viewport.zoom * 7 }
           >
-          <Room style={{fontSize:viewport.zoom * 7}} className="h-20 w-20 text-black"/>
-
+          <Room onClick={()=>handleMarkerClick(data[0]?.long,data[0]?.lat)} style={{fontSize:viewport.zoom * 7 , cursor:'pointer'}} className="h-20 w-20 text-black"/>
+          
           </Marker>
           )  
               

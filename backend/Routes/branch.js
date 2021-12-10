@@ -4,10 +4,11 @@ const verify = require("../verifyToken.js");
 
 
 router.post("/create", async (req, res) => {
-    const newBranch = new Branch(req.body);
-    console.log(newBranch);
+    console.log(req.body);
+    const newBranch = new Branch(req.body);   
     try {
         const savedBranch = await newBranch.save();
+        console.log(savedBranch);
         res.status(200).json(savedBranch);
     } catch (err) {
         console.log(err);
