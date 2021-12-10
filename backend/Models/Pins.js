@@ -1,10 +1,9 @@
 const mongoose = require("mongoose");
 
 const PinSchema = new mongoose.Schema({
-    BranchId: {
+    BranchName: {
         type:String,
         require:true,
-        min:3,
         unique:true,
     },
 
