@@ -37,12 +37,12 @@ function Map({pins}) {
           
         return(
           <Marker
-          latitude={data[0]?.long}
-          longitude={data[0]?.lat}
+          latitude={data?.long}
+          longitude={data?.lat}
           offsetLeft={-viewport.zoom * 3.5}
           offsetTop = {-viewport.zoom * 7 }
           >
-          <Room onClick={()=>handleMarkerClick(data[0]?.long,data[0]?.lat)} style={{fontSize:viewport.zoom * 7 , cursor:'pointer'}} className="h-20 w-20 text-black"/>
+          <Room onClick={()=>handleMarkerClick(data?.long,data?.lat)} style={{fontSize:viewport.zoom * 7 , cursor:'pointer'}} className="h-20 w-20 text-black"/>
           
           </Marker>
           )  

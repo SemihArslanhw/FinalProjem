@@ -1,15 +1,19 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { Search } from "@material-ui/icons"
 import { useHistory } from "react-router";
 import { useDispatch } from "react-redux";
 import { Avatar } from '@material-ui/core';
 import { ShoppingBasket } from '@material-ui/icons';
 import { Person } from '@material-ui/icons';
+import * as api from '../../api/index';
 
 function Header() {
     const history = useHistory();
+    const searchText  = useRef();
     const [user , setUser] = useState(JSON.parse(localStorage.getItem('profile')));
     const [profileBar, setProfileBar] = useState(false);
+    const [searchResponse , setSearchResponse] = useState();
+    const [searchBar, setSearchBar] = useState(false);
     const [search, setSearch] = useState();
     const PF = "http://localhost:8800/images/";
     const dispatch = useDispatch();
@@ -19,16 +23,42 @@ function Header() {
         history.push("/")
         setUser(null);
     }
-      
+    
+    const handleSearch = async() => {
+    try {
+    const res =await api.searchBranches(searchText.current.value);
+    setSearchResponse(res.data);
+    } catch (error) {
+        console.log(error);
+    }
+    }
     
     return (
         <div className="w-full z-50 fixed flex items-center  justify-around shadow-md bg-white h-20">
+            {searchBar && <div class="absolute mt-20    w-full inset-y-0  flex justify-center  pr-2">
+        <div className='bg-white overflow-y-scroll  h-96 w-2/5  border-2  rounded-b-lg'>
+        {searchResponse?.map((Branch, index) => {
+        return(
+            <div onClick={()=>{history.push("/company/"+ Branch.CompanyName +"/" + Branch.BranchName)}} className="cursor-pointer w-full flex flex-col justify-center hover:bg-gray-100 bg-white border-2 h-20 text-black">
+        <p className="ml-4 text-center">{Branch.BranchName}  </p>  
+        <div className="container h-3/4 p-3 flex items-center ">
+            <img className=" object-fill rounded-xl h-16 mb-6 w-1/4 " src={PF + Branch.BranchImage}></img>
+            <p className="ml-auto left-full">{Branch.BranchAddressCity} / {Branch.BranchAddressdistrict}</p></div>
+        </div> 
+        )
+    })
+        }
+        </div>
+    </div>}
             <div onClick={() => { history.push("/") }} translate="no" className=" font-mono cursor-pointer text-black">Final Proje</div>
 
             <div class="relative w-1/4 text-gray-700">
-  <input class="w-full h-10 pl-8 pr-3 text-base placeholder-gray-600 border rounded-lg outline-none bg-gray-200 focus:border-black" type="text" placeholder="Markaya , kıyafete göre arama yap"/>
-  <div class="absolute inset-y-0 left-0 flex items-center px-2 pointer-events-none">
-   <Search></Search>
+  <input   ref={searchText} class="w-full h-10 pl-8 pr-3 text-base placeholder-gray-600 border rounded-lg outline-none bg-gray-200 focus:border-black" onChange={()=>handleSearch()}  onClick={()=>{setSearchBar(true)}} type="text" placeholder="Markaya , kıyafete göre arama yap"/>
+   
+  <div class="absolute inset-y-0 left-0 flex items-center px-2 ">
+  {!searchBar ?<Search ></Search>
+: <p className='cursor-pointer' onClick={()=>setSearchBar(false)}>X</p>  
+} 
   </div>
 </div>
             {!user ? <div onClick={()=>{history.push("/giris")}} className="flex cursor-pointer text-black group"><p className="group-hover:text-yellow-600">Giriş Yap</p> <Person className="group-hover:text-yellow-600"/> </div> : <div className="flex w-40 items-center justify-between">  

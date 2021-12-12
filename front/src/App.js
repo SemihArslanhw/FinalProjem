@@ -2,6 +2,7 @@ import React,{useState} from "react";
 import Home from "./pages/home";
 import Login from "./pages/login";
 import Register from "./pages/register"
+import Branch from "./pages/branch"
 import CompanyDetails from "./pages/companyDetails";
 import { ToastContainer } from 'react-toastify'
 
@@ -50,6 +51,10 @@ function App() {
           </Route>
           <Route path="/company/:companyname/createBranch">
           {!user ? <Redirect to="/giris"/> :<BranchCreatePage/>}
+          </Route>
+
+          <Route path="/company/:companyname/:branchname" exact>
+          {!user ? <Redirect to="/giris"/> :<Branch/>}
 
           </Route>
         </Switch>

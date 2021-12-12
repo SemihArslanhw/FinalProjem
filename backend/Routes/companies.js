@@ -40,6 +40,19 @@ router.get("/getByCompanyName/:companyName",async (req,res)=>{
 
 })
 
+//GET COMPANY BY COMPANYID
+router.get("/getByCompanyID/:companyID",async (req,res)=>{
+    const {companyID} = req.params
+    try {
+        const getCompany =await Companies.find({_id: companyID},{CompanyName:1});
+        res.status(200).json(getCompany);
+    } catch (error) {
+        res.status(500).json(error)
+    }
+
+}
+)
+
 //GET ALL COMPANIES
 router.get("/",async (req,res)=>{
     try {

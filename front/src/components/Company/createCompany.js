@@ -79,9 +79,9 @@ function CreateCompany() {
     
     return (
         <div className="w-full h-full  mt-20 flex text-black">
-            <div className="h-full w-1/5 flex "><CompanyLeftBar /></div>
 
-            <div className="h-full w-4/5 flex flex-col">
+
+            <div className="h-full w-full flex flex-col">
                 <CompanyHeader />
                 <div className="w-full h-full mt-10 flex flex-col items-center ">
                     <p className="text-left w-4/5"> Şirket görünüm önizlemesi </p>

@@ -30,8 +30,10 @@ try {
 router.get("/getByID/:id",async (req,res)=>{
     const {id} = req.params
     console.log(id)
+    const getPin = [];
     try {
-        const getPin =await Pin.find({BranchName:id})
+        const getPinAll =await Pin.find({BranchName:id})
+        getPin.push(getPinAll);
         res.status(200).json(getPin);
     } catch (error) {
         res.status(500).json(error)

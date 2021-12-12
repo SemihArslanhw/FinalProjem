@@ -37,11 +37,16 @@ function DetailComponent({ company , setCreateBranch}) {
   }
 
   const getPinsByCompany = async () => {
-
+  const dtStor = [];
     try {
-      const pins = await api.getPinByCompanyId(company._id);
-      setPins(pins.data);
+      const pind = await api.getPinByCompanyId(company._id);
+        pind.data.map(pin => {
+          console.log(pin[0])
+        dtStor.push(pin[0]);
+        })
+      setPins(dtStor);
       setPinLoading(false);
+      console.log(pins)
     } catch (error) {
       setPinLoading(false);
       console.log(error);
@@ -65,7 +70,7 @@ function DetailComponent({ company , setCreateBranch}) {
         <div class="flex flex-col flex-1 gap-5 sm:p-2">
           <div class="flex  flex-1 flex-col gap-3 items-center">
           <div className="ml-auto flex flex-col">
-          {company.Author === user.result.email && <p onClick={()=>history.push("/company/" + company?.CompanyName + "/createBranch")} className="transition-all cursor-pointer hover:text-yellow-500">Yeni Şube Oluştur</p>}  </div>
+          {company?.Author === user.result.email && <p onClick={()=>history.push("/company/" + company?.CompanyName + "/createBranch")} className="transition-all cursor-pointer hover:text-yellow-500">Yeni Şube Oluştur</p>}  </div>
             <img src={PF + company?.Companyimage} class="bg-gray-200 w-14 h-14 rounded-2xl" ></img>
             <div class=" w-full m-1 h-3 rounded-2xl" >Şirket ismi : {company?.CompanyName}</div>
             <div class=" w-full m-1 h-3 rounded-2xl" >Şirket Açıklaması:{company?.Description}</div>
@@ -92,7 +97,8 @@ function DetailComponent({ company , setCreateBranch}) {
     "
             ></div>
           </div>
-            : <Map pins={pins}></Map>
+            : <Map pins={pins} />
+             
           }
         </div>
         
@@ -101,7 +107,7 @@ function DetailComponent({ company , setCreateBranch}) {
         {branchesLoading ?  <div className="h-full w-full flex items-center justify-center">  <div class="animate-spin rounded-full h-32 w-32 border-t-4 border-b-4 border-purple-500"
             ></div> </div>:
             branches?.map((branch , i)=>{
-             return <DetailCompanyComp key={i} Branch={branch} />
+             return <DetailCompanyComp key={i} company={company?.CompanyName} Branch={branch} />
              
             }) }
         </div>

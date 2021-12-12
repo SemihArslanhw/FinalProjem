@@ -30,8 +30,8 @@ function CompanyPage() {
     return (
         <div className="w-full h-full flex flex-col text-black">
         <div className="w-full h-full   mt-20 flex text-black">
-         <div className="h-full w-1/5 flex "><CompanyLeftBar/></div>
-         <div className="h-full w-4/5 flex flex-col">
+
+         <div className="h-full w-full flex flex-col">
              <CompanyHeader/>
              <div className="w-full h-full mt-10 flex flex-col items-center ">
          {loading ? <div class="bg-white w-full  p-2 sm:p-4 sm:h-64 rounded-2xl shadow-lg flex flex-col sm:flex-row gap-5 select-none ">

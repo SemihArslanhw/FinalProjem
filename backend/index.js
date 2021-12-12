@@ -8,8 +8,8 @@ const pinRoute = require("./Routes/pins.js")
 const authRoute = require("./Routes/auth.js")
 const branchRoute = require("./Routes/branch.js")
 const companiesRoute = require("./Routes/companies.js")
-const bodyParserr = require('body-parser')
-
+const searchRoute  = require("./Routes/search.js");
+const productRoute = require("./Routes/product.js");
 
 dotenv.config();
 
@@ -40,7 +40,9 @@ app.use(express.json());
 app.use("/api/pins",pinRoute);
 app.use("/api/auth",authRoute);
 app.use("/api/companies",companiesRoute);
-app.use("/api/branches",branchRoute)
+app.use("/api/branches",branchRoute);
+app.use("/api/search",searchRoute);
+app.use("/api/products",productRoute);
 
 app.listen(PORT,()=>{
     console.log("backend server is runing")

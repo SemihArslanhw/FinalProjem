@@ -16,6 +16,17 @@ router.post("/create", async (req, res) => {
     }
 });
 
+//GET BRANCH BY BRANCHNAME
+router.get("/getBranch/:branchName", async (req, res) => {
+    try {
+        const branch = await Branch.findOne({ BranchName: req.params.branchName });
+        res.status(200).json(branch);
+    } catch (err) {
+        console.log(err);
+        res.status(500).json(err);
+    }
+});
+
 //GET BRANCH BY COMPANY ID
  router.get("/getByCompanyID/:id",async(req,res)=>{
    const {id} = req.params
