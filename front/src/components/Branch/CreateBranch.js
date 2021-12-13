@@ -10,6 +10,7 @@ import {Room} from "@material-ui/icons";
 import { useHistory } from 'react-router';
 
 function CreateBranch() {
+    const [user] = useState(JSON.parse(localStorage.getItem('profile')));
     const history = useHistory();
     const link = useParams();
     const search = useRef();
@@ -36,11 +37,15 @@ function CreateBranch() {
         zoom:4
       });
     useEffect(()=>{
-        const fetchData = async () => {
+       
+                const fetchData = async () => {
            try {
                const comp =await api.getCompanyByCompanyName(companyname);
-               console.log(comp?.data[0]._id);
+               console.log(comp?.data[0]);
                setCompanyId(comp?.data[0]._id);
+              if(comp?.data[0].Author !== user.result.email){
+            history.push('/')
+        }
            } catch (error) {
                console.log("Böyle bir şirket yok");
            }
@@ -48,7 +53,7 @@ function CreateBranch() {
 
         }
      fetchData();
-
+     
        },[])
 
     const SearchAlgorythm = () =>{

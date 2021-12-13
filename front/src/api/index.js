@@ -32,7 +32,7 @@ export const getAllPins = () => API.get("/pins")
 export const getAllCompanies = () => API.get("/companies")
 
  //GET COMPANY BY ID
-export const getCompanyById = (_id) => API.get("/getByCompanyID/"+_id)
+export const getCompanyById = (_id) => API.get("/companies/getByCompanyID/"+_id)
 
   //GET COMPANY BY ID
 export const getCompanyByAuthor = (author) => API.get("/companies/getByID/"+author)
@@ -54,3 +54,6 @@ export const getBranchByBranchName = (BranchName) => API.get("/branches/getBranc
 
   //SEARCH 
 export const searchBranches = (regex) => API.get("/search/"+regex)
+  
+  //CREATE PRODUCT 
+export const createProduct = (BranchId,ProductName,Category,ProductImage,ProductDescription,ProductStockSituation) => API.post("/products/create" , {BranchId,ProductName,Category,ProductImage,ProductDescription,ProductStockSituation})

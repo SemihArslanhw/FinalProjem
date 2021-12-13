@@ -9,7 +9,7 @@ const BranchSchema = new mongoose.Schema({
     BranchName:{
         type:String,
         require:true,
-
+        unique:true
     },
     BranchAddress:{
         type:String,

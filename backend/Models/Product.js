@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 
 const ProductSchema = new mongoose.Schema({
     BranchId: {
+        type:Number,
+        required:true
     },
     ProductName: {
         type: String,
@@ -17,13 +19,15 @@ const ProductSchema = new mongoose.Schema({
     },
     ProductDescription: {
         type: String,
-
-    },
-    ProductQuantity:{
-        type: Number,
         required: true
-        
-    }
+    },
+    ProductStockSituation:{
+        type: String,
+        required: true,
+        min: 3,
+        max:3
+    },
+
 
 
 });

@@ -5,7 +5,7 @@ const Branch = require("../Models/Branch.js");
 const Product = require("../Models/Product.js");
 
 //CREATE A NEW PRODUCT
-router.post("/", verify, async (req, res) => {
+router.post("/create", verify, async (req, res) => {
  const newProduct = req.body;
  try {
     const savedPin =await newProduct.save();

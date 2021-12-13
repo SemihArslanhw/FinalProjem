@@ -38,14 +38,28 @@ function BranchPage() {
                  </div>
                   
                 </div>
-                <div className="w-full  gap-5 p-3 items-center flex h-2/5 border-b border-r border-l border-gray-400   rounded-b-md">
-                    <p onClick={()=>setPorductsPage(true)} className='h-full transition-all cursor-pointer mt-2 border-b-2 border-white hover:border-red-300'>Mağaza İçeriği</p>
+                <div className="w-full justify-between gap-5 p-3 items-center flex h-2/5 border-b border-r border-l border-gray-400   rounded-b-md">
+                 <div className='gap-5 items-center flex '> <p onClick={()=>setPorductsPage(true)} className='h-full transition-all cursor-pointer mt-2 border-b-2 border-white hover:border-red-300'>Mağaza İçeriği</p>
                     <p onClick={()=>setPorductsPage(false)} className='h-full transition-all mt-2 cursor-pointer border-b-2 border-white hover:border-red-300'>Mağaza Konumu</p>
+                  </div>   
+                   <input className='p-3 border-2 border-yellow-500 rounded-lg outline-none' type="text" placeholder='Mağaza İçerisinde Arama Yap'></input>
                 </div>
             </div>
             <div className='mt-5'>
               
-              {porductsPage ? <ProductsPage/>:<BranchMap/>} 
+              {branchLoading ? <div class="flex justify-center  items-center">
+            <div
+              class="
+      animate-spin
+      rounded-full
+      h-32
+      w-32
+      border-t-4 border-b-4 border-purple-500
+    "
+            ></div>
+          </div> 
+          : 
+          porductsPage ? <ProductsPage branch={branch}/>:<BranchMap/>} 
                </div> 
         </div>
     )
