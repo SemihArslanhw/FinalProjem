@@ -6,7 +6,7 @@ import 'react-medium-image-zoom/dist/styles.css'
 import * as api from '../../api/index'
 
 function ProductDetails() {
-    const PF = "http://185.136.160.132/images/";
+    const PF = "http://185.136.160.132:8800/images/";
     const params = useParams();
   const history = useHistory();
   const [product, setProduct] = React.useState();

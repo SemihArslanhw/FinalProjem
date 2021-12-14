@@ -16,7 +16,7 @@ function Header() {
     const [searchResponse , setSearchResponse] = useState();
     const [searchBar, setSearchBar] = useState(false);
     const [search, setSearch] = useState();
-    const PF = "http://185.136.160.132/images/";
+    const PF = "http://185.136.160.132:8800/images/";
     const dispatch = useDispatch();
 
     const logout = () => {

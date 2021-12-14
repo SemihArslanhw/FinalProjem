@@ -3,7 +3,7 @@ import * as api from "../../../api/index"
 import { useParams , useHistory} from "react-router-dom";
 
 function DetailCompanyComp({Branch , company}) {
-    const PF = "http://185.136.160.132/images/";
+    const PF = "http://185.136.160.132:8800/images/";
     const history = useHistory();
     
     console.log(Branch)

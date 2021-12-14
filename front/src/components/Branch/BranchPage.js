@@ -6,7 +6,7 @@ import BranchMap from './BranchComponents/BranchMap';
 import ProductsPage from './BranchComponents/ProductsPage';
 
 function BranchPage() {
-    const PF = "http://185.136.160.132/images/";
+    const PF = "http://185.136.160.132:8800/images/";
     const [branch, setBranch] = useState();
     const params = useParams().branchname;
     const companyname = useParams().companyname;
