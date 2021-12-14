@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 
 
 function ProductComponent({ product }) {
-    const PF = "http://185.136.160.132/images/";
+    const PF = "http://185.136.160.132:8800/images/";
     const params = useParams();
     const history = useHistory();
 
