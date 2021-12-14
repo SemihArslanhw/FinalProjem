@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const ProductSchema = new mongoose.Schema({
     BranchId: {
-        type:Number,
+        type:String,
         required:true
     },
     ProductName: {
@@ -27,9 +27,10 @@ const ProductSchema = new mongoose.Schema({
         min: 3,
         max:3
     },
+    
+    
 
 
+},{ timestamps:true });
 
-});
-
-exports.Product = mongoose.model("Product", ProductSchema);
+module.exports = mongoose.model("Product", ProductSchema);

@@ -5,6 +5,7 @@ import Register from "./pages/register"
 import Branch from "./pages/branch"
 import CompanyDetails from "./pages/companyDetails";
 import CreateProduct from "./pages/createProduct";
+import Product from "./pages/product";
 import { ToastContainer } from 'react-toastify'
 
 import {
@@ -60,6 +61,10 @@ function App() {
           </Route>
           <Route path="/company/:companyname/:branchname/createProduct" exact>
           {!user ? <Redirect to="/giris"/> :<CreateProduct/>}
+
+          </Route>
+          <Route path="/company/:companyname/:branchname/:id" exact>
+          {!user ? <Redirect to="/giris"/> :<Product/>}
 
           </Route>
         </Switch>

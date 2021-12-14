@@ -57,3 +57,9 @@ export const searchBranches = (regex) => API.get("/search/"+regex)
   
   //CREATE PRODUCT 
 export const createProduct = (BranchId,ProductName,Category,ProductImage,ProductDescription,ProductStockSituation) => API.post("/products/create" , {BranchId,ProductName,Category,ProductImage,ProductDescription,ProductStockSituation})
+
+  //GET PRODUCTS BY BRANCHID
+export const getProductsByBranchId = (BranchId) => API.get("/products/get/"+BranchId);
+
+  //GET PRODUCT BY PRODUCTİD
+export const getProductByProductId = (_id) => API.get("/products/getByProductId/"+_id);

@@ -11,6 +11,7 @@ function CreateProductPage() {
   const [productImage, setProductImage] = React.useState();
   const productName = React.useRef();
   const productType = React.useRef();
+  const [branchId , setBranchId] = React.useState();
   const ProductDescription = React.useRef();
   const productSituation = React.useRef();
   const params = useParams();
@@ -19,7 +20,7 @@ function CreateProductPage() {
   useEffect(() => {
    const getBranch = async () => {
       const branch = await api.getBranchByBranchName(params.branchname);
-      
+      setBranchId(branch.data._id);
     }
     getBranch();
   }, [])
@@ -33,8 +34,9 @@ function CreateProductPage() {
       data1.append('name', filename1);
       data1.append('file', productImage);
       try {
-        const res = await api.createProduct();
+        const res = await api.createProduct(branchId,productName.current.value, productType.current.value, filename1,ProductDescription.current.value, productSituation.current.value);
         await api.uploadFile(data1);
+        history.push("/company/"+params.companyname+"/"+params.branchname)
       } catch (error) {
         
       }
