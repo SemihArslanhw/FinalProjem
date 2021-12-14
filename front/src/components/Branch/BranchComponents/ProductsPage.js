@@ -57,7 +57,7 @@ const getCompany = async () => {
     const Search = () => {
 
         setFilteredProducts(
-            products.filter(function (value) {
+            products?.filter(function (value) {
                 if (text === "") {
                     return value;
                 } else if (
