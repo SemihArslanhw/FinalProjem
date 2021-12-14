@@ -6,6 +6,7 @@ import { Avatar } from '@material-ui/core';
 import { ShoppingBasket } from '@material-ui/icons';
 import { Person } from '@material-ui/icons';
 import * as api from '../../api/index';
+import Logo from "./logo.png"
 
 function Header() {
     const history = useHistory();
@@ -50,7 +51,7 @@ function Header() {
         }
         </div>
     </div>}
-            <div onClick={() => { history.push("/") }} translate="no" className=" font-mono cursor-pointer text-black">Final Proje</div>
+            <img src={Logo} onClick={() => { history.push("/") }}  className="w-24 h-20  cursor-pointer text-black"></img>
 
             <div class="relative w-1/4 text-gray-700">
   <input   ref={searchText} class="w-full h-10 pl-8 pr-3 text-base placeholder-gray-600 border rounded-lg outline-none bg-gray-200 focus:border-black" onChange={()=>handleSearch()}  onClick={()=>{setSearchBar(true)}} type="text" placeholder="Markaya , kıyafete göre arama yap"/>

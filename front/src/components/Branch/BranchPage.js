@@ -12,6 +12,7 @@ function BranchPage() {
     const companyname = useParams().companyname;
     const [branchLoading, setBranchLoading] = useState(true);
     const [porductsPage , setPorductsPage] = useState(true);
+    const [text , setText] = useState("");
 
     useEffect(()=>{
        const getBranchByBranchNameF = async () => {
@@ -42,7 +43,7 @@ function BranchPage() {
                  <div className='gap-5 items-center flex '> <p onClick={()=>setPorductsPage(true)} className='h-full transition-all cursor-pointer mt-2 border-b-2 border-white hover:border-red-300'>Mağaza İçeriği</p>
                     <p onClick={()=>setPorductsPage(false)} className='h-full transition-all mt-2 cursor-pointer border-b-2 border-white hover:border-red-300'>Mağaza Konumu</p>
                   </div>   
-                   <input className='p-3 border-2 border-yellow-500 rounded-lg outline-none' type="text" placeholder='Mağaza İçerisinde Arama Yap'></input>
+                   <input type="text" value={text} onChange={(e)=>setText(e.currentTarget.value)} className='p-3 border-2 border-yellow-500 rounded-lg outline-none' type="text" placeholder='Mağaza İçerisinde Arama Yap'></input>
                 </div>
             </div>
             <div className='mt-5'>
@@ -59,7 +60,7 @@ function BranchPage() {
             ></div>
           </div> 
           : 
-          porductsPage ? <ProductsPage branch={branch}/>:<BranchMap/>} 
+          porductsPage ? <ProductsPage  text={text}  branch={branch}/>:<BranchMap/>} 
                </div> 
         </div>
     )
