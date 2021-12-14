@@ -4,7 +4,7 @@ import { useHistory } from 'react-router';
 
 function CompanyCard({ company }) {
     const [qrImage, setQrImage] = useState(null)
-    const PF = "http://localhost:8800/images/";
+    const PF = "http://185.136.160.132/images/";
     const history = useHistory();
     
     useEffect(() => {
