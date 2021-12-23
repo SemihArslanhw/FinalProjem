@@ -18,6 +18,7 @@ function HomeBody() {
      const getAllPins = async () => {
      try {
         const pins = await api.getAllPins();
+        
         setPins(pins?.data);
         setPinLoading(false);
         console.log(pins.data)

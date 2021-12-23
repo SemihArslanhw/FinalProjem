@@ -27,7 +27,7 @@ try {
 })
 
 //GET PIN BY BRANCH
-router.get("/getByID/:id",async (req,res)=>{
+router.get("/getByBranchName/:id",async (req,res)=>{
     const {id} = req.params
     console.log(id)
     const getPin = [];

@@ -6,7 +6,7 @@ import 'react-medium-image-zoom/dist/styles.css'
 import * as api from '../../api/index'
 
 function ProductDetails() {
-    const PF = "http://185.136.160.132:8800/images/";
+    const PF = "http://localhost:8800/images/";
     const params = useParams();
   const history = useHistory();
   const [product, setProduct] = React.useState();
@@ -53,11 +53,11 @@ function ProductDetails() {
            </div>
            <div className='flex flex-col items-center justify-between w-96 h-4/5'>
            <div className=' w-full h-full'>
-          <p  className='p-3 w-full bg-white outline-none border-b-2' >{product?.ProductName}</p>
+          <p  className='p-3 w-full bg-white outline-none border-b-2' >{"Ürün : " + product?.ProductName}</p>
           <p onClick={()=>history.push("/company/"+params.companyname)} className='p-3 cursor-pointer border-b-2 border-white hover:text-blue-600 hover:border-gray-400 transition-all'>Satıcı: {params.companyname}</p>
-          <p className='p-3 w-full bg-white outline-none border-b-2' >{product?.Category}</p>
-          <p  className='p-3 w-full bg-white outline-none break-words  border-b-2' >{product?.ProductDescription} </p>
-          <p className='p-3 w-full bg-white outline-none border-b-2' >{product?.ProductStockSituation}</p>
+          <p className='p-3 w-full bg-white outline-none border-b-2' >{"Kategori : " + product?.Category}</p>
+          <p  className='p-3 w-full bg-white outline-none break-words  border-b-2' >{"Detaylar : " + product?.ProductDescription} </p>
+          <p className='p-3 w-full bg-white outline-none border-b-2' >{"Stok Durumu : " + product?.ProductStockSituation}</p>
            </div>
            
            </div>

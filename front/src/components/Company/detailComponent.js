@@ -8,7 +8,7 @@ import DetailCompanyComp from './detailCompanyComp/detailCompanyComp';
 
 function DetailComponent({ company , setCreateBranch}) {
   const [user] = useState(JSON.parse(localStorage.getItem('profile')));
-  const PF = "http://185.136.160.132:8800/images/";
+  const PF = "http://localhost:8800/images/";
   const [branchesLoading , setBranchesLoading] = useState(true);
   const [branches , setBranches] = useState([]);
   const [pinloading, setPinLoading] = useState(true);

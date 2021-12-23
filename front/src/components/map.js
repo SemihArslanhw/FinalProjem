@@ -1,10 +1,12 @@
 import {useEffect, useState} from 'react';
 import ReactMapGL, { Marker , Popup} from 'react-map-gl';
 import {Room} from "@material-ui/icons";
+import * as api from '../api/index';
 
 function Map({pins}) {
+    
+    const [userPosition, setUserPosition] = useState();
 
-    const [showPopup, togglePopup] = useState(false);
     const [viewport, setViewport] = useState({
       latitude: 39,
       longitude: 35,
@@ -13,8 +15,21 @@ function Map({pins}) {
     
    useEffect(()=>{
      console.log(pins);
+     navigator.geolocation.getCurrentPosition(showPosition);
+     
    },[pins])
    
+    
+   const showPosition = (position) => {
+     console.log(position.coords);
+     pins.push({
+       long: position.coords.latitude,
+       lat: position.coords.longitude,
+       BranchName: "Konumum",
+   })  
+  }
+  
+
    const handleMarkerClick = (lat,long) =>{
      setViewport({
        latitude:lat,
@@ -36,20 +51,23 @@ function Map({pins}) {
         {pins?.map((data)=>{
           
         return(
-          <Marker
+         <div> <Marker
           latitude={data?.long}
           longitude={data?.lat}
           offsetLeft={-viewport.zoom * 3.5}
           offsetTop = {-viewport.zoom * 7 }
           >
-          <Room onClick={()=>handleMarkerClick(data?.long,data?.lat)} style={{fontSize:viewport.zoom * 7 , cursor:'pointer'}} className="h-20 w-20 text-black"/>
+          <Room onClick={()=>handleMarkerClick(data?.long,data?.lat)} style={{fontSize:viewport.zoom * 7 , cursor:'pointer' }} className="h-20 w-20 z-50 text-red-600" />
+          <p className='cursor-pointer hover:text-blue-600 transition-all border-black  text-black z-20'>{data?.BranchName}</p>
           
           </Marker>
+          </div>
           )  
               
           
                 
         })}
+      
         </ReactMapGL>
   
       </div>

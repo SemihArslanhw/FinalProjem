@@ -1,6 +1,7 @@
 const router = require("express").Router();
 const Companies = require("../Models/Companies.js");
 const verify = require("../verifyToken.js");
+const Branch = require("../Models/Branch.js");
 
 //CREATE A NEW COMPANY
 router.post("/create",async (req,res)=>{
@@ -65,6 +66,21 @@ router.get("/getCompanyNameByCompanyID/:companyID",async (req,res)=>{
 
 }
 )
+
+//GET COMPANYNAME BY BRANCHNAME 
+router.get("/getCompanyNameByBranchName/:branchName",async (req,res)=>{
+    const {branchName} = req.params
+    console.log(branchName)
+    try {
+        const getBranch =await Branch.find({BranchName: branchName});
+        const getCompany =await Companies.find({_id: getBranch[0].CompanyId});
+        console.log(getCompany)
+        res.status(200).json(getCompany);
+    } catch (error) {
+        res.status(500).json(error)
+    }
+
+})
 
 //GET ALL COMPANIES
 router.get("/",async (req,res)=>{

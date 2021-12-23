@@ -1,15 +1,17 @@
 import React from 'react'
 import { useEffect , useState} from 'react';
 import * as api from '../../api/index';
-import { useParams } from "react-router-dom";
-import BranchMap from './BranchComponents/BranchMap';
+import { useParams , useHistory } from "react-router-dom";
 import ProductsPage from './BranchComponents/ProductsPage';
+import Map from "../map"
 
 function BranchPage() {
-    const PF = "http://185.136.160.132:8800/images/";
+    const history = useHistory();
+    const PF = "http://localhost:8800/images/";
     const [branch, setBranch] = useState();
     const params = useParams().branchname;
     const companyname = useParams().companyname;
+    const [pins , setPins] = useState();
     const [branchLoading, setBranchLoading] = useState(true);
     const [porductsPage , setPorductsPage] = useState(true);
     const [text , setText] = useState("");
@@ -18,6 +20,9 @@ function BranchPage() {
        const getBranchByBranchNameF = async () => {
         try {
         const res = await api.getBranchByBranchName(params);
+        const pinres = await api.getPinByBranchName(res.data.BranchName)
+        const respin = pinres.data[0]
+        setPins(respin)
         console.log(res.data);
         setBranch(res.data);
         setBranchLoading(false);
@@ -28,14 +33,17 @@ function BranchPage() {
        }
        getBranchByBranchNameF();
     },[])
+
+   
+
     return (
         <div className="container m-auto mt-10 ">
             <div className="w-full h-40 rounded-sm ">
                 <div className='w-full px-4 bg-gray-400 items-center flex justify-between h-3/5 border border-gray-400 rounded-t-sm'>
                  <img className='w-20 h-20 rounded-full border object-fill border-black' src={PF + branch?.BranchImage}></img> 
-                 <div className='h-full text-white flex flex-col justify-around'>
+                 <div className='h-full mb-5 transition-all cursor-pointer border-b-2 border-gray-400 hover:border-blue-600 text-white flex flex-col justify-around'>
                      <p>{branch?.BranchName}</p> 
-                     <p className='text-center'>{companyname}</p>
+                     <p onClick={()=>history.push("/company/"+companyname)} className='text-center'>{companyname}</p>
                  </div>
                   
                 </div>
@@ -60,7 +68,7 @@ function BranchPage() {
             ></div>
           </div> 
           : 
-          porductsPage ? <ProductsPage  text={text}  branch={branch}/>:<BranchMap/>} 
+          porductsPage ? <ProductsPage  text={text}  branch={branch}/>:<div className='h-96 w-full'><Map pins={pins}/></div>} 
                </div> 
         </div>
     )

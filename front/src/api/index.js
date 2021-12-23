@@ -31,6 +31,9 @@ export const getAllPins = () => API.get("/pins")
  //GET ALL COMPANIES
 export const getAllCompanies = () => API.get("/companies")
 
+ //GET COMPANY BY BRANCHNAME
+export const getCompanyByBranchName = (BranchName) => API.get("/companies/getCompanyNameByBranchName/"+BranchName)
+
  //GET COMPANY BY ID
 export const getCompanyById = (_id) => API.get("/companies/getByCompanyID/"+_id)
 
@@ -43,11 +46,17 @@ export const getCompanyByCompanyName = (companyName) => API.get("/companies/getB
   //GET PIN BY COMPANYNAME
 export const getPinByCompanyId = (companyId) => API.get("/pins/getByCompany/"+companyId)
 
+  //GET PIN BY BRANCHNAME
+export const getPinByBranchName = (BranchName) => API.get("/pins/getByBranchName/"+BranchName)
+
   //GET BRANCHES BY COMPANYID
 export const getBranchesByCompanyId = (companyID) => API.get("/branches/getByCompanyID/" + companyID)
 
   //CREATE BRANCH
 export const createBranch = (CompanyId,BranchName,BranchAddress,BranchAddressCity,BranchAddressdistrict,BranchPhone,BranchGoogleMaps,BranchImage) => API.post("/branches/create" , {CompanyId,BranchName,BranchAddress,BranchAddressCity,BranchAddressdistrict,BranchPhone,BranchGoogleMaps,BranchImage})
+
+  //GET BRANCH BY BRANCHID
+export const getBranchById = (branchId) => API.get("/branches/get/"+branchId)
 
   //GET BRANCH BY BRANCHNAME
 export const getBranchByBranchName = (BranchName) => API.get("/branches/getBranch/"+BranchName)

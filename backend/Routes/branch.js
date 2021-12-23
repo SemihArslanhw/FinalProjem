@@ -42,4 +42,15 @@ router.get("/getBranch/:branchName", async (req, res) => {
 
  })
 
+ //GET BRANCH BY BRANCHID
+    router.get("/get/:branchId", async (req, res) => {
+        try {
+            const branch = await Branch.findOne({ _id: req.params.branchId });
+            res.status(200).json(branch);
+        } catch (err) {
+            console.log(err);
+            res.status(500).json(err);
+        }
+    });
+
 module.exports = router;
